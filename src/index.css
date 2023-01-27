@@ -74,6 +74,18 @@ img {
   text-align: center;
 }
 
+.section {
+  padding: 5rem 0;
+}
+.section-title {
+  font-size: 2rem;
+  text-transform: capitalize;
+  letter-spacing: var(--mainSpacing);
+  text-align: center;
+  margin-bottom: 3.5rem;
+  margin-top: 1rem;
+}
+
 /* 
 ====== 
 Buttons 
@@ -171,4 +183,62 @@ Navbar
 }
 .logo {
   width: 12rem;
+}
+
+/* 
+====== 
+Form
+======
+*/
+.create {
+  margin-top: 1rem;
+  padding-bottom: 0;
+  align-items: center;
+}
+
+.create-form {
+  width: var(--smallWidth);
+  margin: 0 auto;
+  max-width: var(--maxWidth);
+  background: #e1e1e1;
+  padding: 2rem 2.5rem;
+  /* text-transform: capitalize; */
+  border-radius: var(--mainBorderRadius);
+  box-shadow: var(--lightShadow);
+}
+
+.form-control {
+  margin-bottom: 1.25rem;
+}
+
+.form-control label {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-weight: bold;
+  letter-spacing: 0.25rem;
+  color: var(--primaryColor);
+}
+.form-control input {
+  width: 100%;
+  border: none;
+  border-color: transparent;
+  background: var(--mainBackground);
+  border-radius: var(--mainBorderRadius);
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+.form-control small {
+  color: var(--primaryColor);
+}
+.register-label {
+  float: right;
+  color: #222;
+}
+
+.register-label label {
+  font-weight: 700;
+  color: var(--primaryDarkColor);
+}
+.register-label label:hover {
+  text-decoration: underline;
 }
