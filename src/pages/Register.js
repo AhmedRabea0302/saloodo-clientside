@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import validateFormFields from "../Validations/registerValidator";
 
 const Register = () => {
   const initialValues = {
@@ -11,10 +12,27 @@ const Register = () => {
   };
   const [formFields, setFormFields] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
-  const handleChange = (e) => {};
+  const [isSubmitt, setIsSubmitt] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormFields({ ...formFields, [name]: value });
+    console.log(formFields);
+  };
+
+  useEffect(() => {
+    if (Object.keys(formErrors).length !== 0) {
+      setIsSubmitt(false);
+    }
+  }, [formErrors]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFormErrors(validateFormFields(formFields));
+    setIsSubmitt(true);
+    if (isSubmitt) {
+      console.log("validated");
+    }
   };
 
   return (

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { validateFormFields } from "../Validations/loginValidator";
+
 const Login = () => {
   const initialValues = {
     email: "",
@@ -7,11 +9,27 @@ const Login = () => {
   };
   const [formFields, setFormFields] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
+  const [isSubmitt, setIsSubmitt] = useState(false);
 
-  const handleChange = (e) => {};
-
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormFields({
+      ...formFields,
+      [name]: value,
+    });
+  };
+  useEffect(() => {
+    if (Object.keys(formErrors).length !== 0) {
+      setIsSubmitt(false);
+    }
+  }, [formErrors]);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFormErrors(validateFormFields(formFields));
+    setIsSubmitt(true);
+    if (isSubmitt) {
+      console.log("Validated");
+    }
   };
   return (
     <section className="section">
