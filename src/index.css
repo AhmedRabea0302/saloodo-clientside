@@ -405,6 +405,39 @@ Parcel
 .delivered {
   background: var(--mainBlue);
 }
+/* 
+====== 
+TODO Parcel
+======
+*/
+
+.todo-parcel {
+  background-color: #ccc;
+  padding: 1.6rem 2rem;
+  display: flex;
+  flex-direction: column;
+  color: var(--primaryDarkColor);
+  width: 60vw;
+  margin: 1.8rem auto;
+  border-radius: 1rem;
+  justify-content: space-around;
+  align-items: center;
+}
+.todo-parcel p {
+  margin: 0.4rem;
+  font-size: 1.2rem;
+  color: var(--mainBlack);
+}
+.delivered-todo {
+  color: var(--mainWhite) !important;
+  padding: 0.6rem 3rem;
+  font-weight: 600;
+  background-color: var(--mainBlue);
+}
+.todo-parcel button {
+  margin-top: 1rem;
+}
+
 /*
 =======
 LOADER
