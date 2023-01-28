@@ -145,6 +145,15 @@ Buttons
 }
 /* 
 ====== 
+Error
+======
+*/
+.error-message {
+  color: var(--primaryDarkColor);
+}
+
+/* 
+====== 
 Navbar
 ======
 */

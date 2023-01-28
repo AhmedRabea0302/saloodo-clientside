@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import authServices from "../Services/Auth";
 import validateFormFields from "../Validations/registerValidator";
 
 const Register = () => {
@@ -13,6 +14,7 @@ const Register = () => {
   const [formFields, setFormFields] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitt, setIsSubmitt] = useState(false);
+  const [message, setMessage] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,7 +33,22 @@ const Register = () => {
     setFormErrors(validateFormFields(formFields));
     setIsSubmitt(true);
     if (isSubmitt) {
-      console.log("validated");
+      try {
+        await authServices.Register(formFields).then(
+          (response) => {
+            setMessage(response.message);
+            if (response.status == 1) {
+              // email not taken
+              setFormFields(initialValues);
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -39,6 +56,7 @@ const Register = () => {
     <section className="section">
       <h1 className="section-title">Register</h1>
       <form method="POST" onSubmit={handleSubmit} className="create-form">
+        <p className="error-message">{message}</p>
         <div className="form-control">
           <label htmlFor="phone_number">Phone Number</label>
           <input
