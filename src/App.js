@@ -7,11 +7,12 @@ import User from "./pages/User";
 import Biker from "./pages/Biker";
 import PendingParcels from "./pages/PendingParcels";
 import Error from "./pages/Error";
-import CreateParcel from "./pages/CreateParcel";
-import SingleParcel from "./pages/SingleParcel";
 
 // import components
+import { ProtectedRoute } from "./components/ProtectedRoutes";
 import Navbar from "./components/Navbar";
+import CreateParcel from "./pages/CreateParcel";
+import SingleParcel from "./pages/SingleParcel";
 function App() {
   return (
     <div className="App">
@@ -20,11 +21,46 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<User />} />
-          <Route path="/create-parcel" element={<CreateParcel />} />
-          <Route path="/biker" element={<Biker />} />
-          <Route path="/all-parcels" element={<PendingParcels />} />
-          <Route path="/single-parcel/:id" element={<SingleParcel />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <User />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/create-parcel"
+            element={
+              <ProtectedRoute>
+                <CreateParcel />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/biker"
+            element={
+              <ProtectedRoute>
+                <Biker />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/all-parcels"
+            element={
+              <ProtectedRoute>
+                <PendingParcels />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/single-parcel/:id"
+            element={
+              <ProtectedRoute>
+                <SingleParcel />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<Error />} />
         </Routes>
       </Router>
