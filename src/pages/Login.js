@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import authServices from "../Services/Auth";
 import { validateFormFields } from "../Validations/loginValidator";
-
 const Login = () => {
+  const navigate = useNavigate();
   const initialValues = {
     email: "",
     password: "",
@@ -10,6 +11,7 @@ const Login = () => {
   const [formFields, setFormFields] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitt, setIsSubmitt] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState(true);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,12 +25,30 @@ const Login = () => {
       setIsSubmitt(false);
     }
   }, [formErrors]);
+  useEffect(() => {}, [isAuthorized]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormErrors(validateFormFields(formFields));
     setIsSubmitt(true);
     if (isSubmitt) {
-      console.log("Validated");
+      try {
+        await authServices.login(formFields).then(
+          (response) => {
+            if (response.token) {
+              console.log(response);
+              response.user_type == 0 ? navigate("/") : navigate("/biker");
+              window.location.reload();
+            } else {
+              setIsAuthorized(false);
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   return (
@@ -36,6 +56,9 @@ const Login = () => {
       <h1 className="section-title">Login</h1>
       <div>
         <form method="POST" onSubmit={handleSubmit} className="create-form">
+          {!isAuthorized && (
+            <p className="error-message">Wrong Email or password!</p>
+          )}
           <div className="form-control">
             <label htmlFor="email">emaill</label>
             <input
@@ -67,7 +90,7 @@ const Login = () => {
             </button>
           </div>
           <p className="register-label">
-            Don't Have Account,
+            Don't Have Account,{" "}
             <Link to="/register">
               <label>Register Here</label>
             </Link>

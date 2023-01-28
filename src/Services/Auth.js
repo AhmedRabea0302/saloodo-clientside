@@ -1,6 +1,26 @@
 const BASE_URL = "http://localhost:8000/api/v1";
 const login = async (values) => {
-  console.log(values);
+  try {
+    const loginData = await fetch(`${BASE_URL}/user/login`, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.token) {
+          const { message, ...rest } = data;
+          localStorage.setItem("user", JSON.stringify(rest));
+        }
+        return data;
+      });
+    return loginData;
+  } catch (error) {
+    return error;
+  }
 };
 
 const Register = async (values) => {
@@ -23,6 +43,14 @@ const Register = async (values) => {
   }
 };
 
-const authServices = { login, Register };
+const logout = async () => {
+  localStorage.removeItem("user");
+};
+
+const getUser = () => {
+  return JSON.parse(localStorage.getItem("user"));
+};
+
+const authServices = { login, Register, logout, getUser };
 
 export default authServices;
