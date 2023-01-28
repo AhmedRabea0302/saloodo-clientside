@@ -35,7 +35,6 @@ const Login = () => {
         await authServices.login(formFields).then(
           (response) => {
             if (response.token) {
-              console.log(response);
               response.user_type == 0 ? navigate("/") : navigate("/biker");
               window.location.reload();
             } else {

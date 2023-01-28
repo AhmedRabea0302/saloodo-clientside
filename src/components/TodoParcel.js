@@ -27,8 +27,14 @@ const TodoParcel = (props) => {
         <p>Parcel Name: {parcel_name}</p>
         <p>Pickup Adress: {pickup_address}</p>
         <p>Dropoff Adress: {dropoff_address}</p>
-        <p>Picked At: {pickedup_at}</p>
-        <p>Delivery Time: {dropedoff_at}</p>
+        <p>
+          Picked At: Date - {pickedup_at.split(" ")[0]}, Time:{" "}
+          {pickedup_at.split(" ")[1].substring(0, 5)}
+        </p>
+        <p>
+          Delivery Time: Date - {dropedoff_at.split(" ")[0]}, Time:{" "}
+          {dropedoff_at.split(" ")[1].substring(0, 5)}
+        </p>
       </div>
       <button className="btn btn-primary" onClick={handleClick}>
         Set Delivered

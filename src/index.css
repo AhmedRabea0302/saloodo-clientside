@@ -503,3 +503,44 @@ LOADER
     height: 5em;
   }
 }
+
+/* 
+====== 
+Media Queries
+======
+*/
+@media screen and (max-width: 768px) {
+  .section-title {
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+  }
+  /* ===== Login Form ===== */
+  .register-label {
+    font-size: 0.8rem;
+  }
+
+  /* ===== Navbar Form ===== */
+  .logo {
+    width: 6rem;
+  }
+  .nav-links a {
+    font-size: 0.65rem;
+    margin-right: 0.2rem;
+    width: 100%;
+    letter-spacing: 0;
+  }
+  .nav-links button {
+    letter-spacing: 0;
+    text-transform: capitalize;
+    padding: 0.2rem 0.5rem;
+  }
+  /* ===== Parcel Details ===== */
+  .parcel-details,
+  .todo-parcel {
+    width: 85vw;
+  }
+  .todo-parcel p {
+    font-size: 1rem;
+  }
+}

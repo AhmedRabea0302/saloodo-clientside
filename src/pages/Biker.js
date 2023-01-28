@@ -11,7 +11,6 @@ const Biker = () => {
   useEffect(() => {
     fetchToDoListParcels(user_id).then((response) => {
       setTodolsits(response);
-      console.log(response);
     });
   }, []);
 

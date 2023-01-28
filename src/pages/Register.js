@@ -19,7 +19,6 @@ const Register = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormFields({ ...formFields, [name]: value });
-    console.log(formFields);
   };
 
   useEffect(() => {
