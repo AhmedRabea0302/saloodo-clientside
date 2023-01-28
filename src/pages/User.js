@@ -1,5 +1,11 @@
+import ParcelsList from "../components/ParecelsList";
+
 const User = () => {
-  return <div>User</div>;
+  return (
+    <section className="section">
+      <ParcelsList parcelstype="userparcels" />
+    </section>
+  );
 };
 
 export default User;
